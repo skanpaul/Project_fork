@@ -15,12 +15,14 @@ int main(void)
 	if (fk_id == FORK_CHILD)
 	{
 		pid_child = getpid();
-		printf("==================================\n");
+		// printf("\n");
+		// printf("==================================\n");
 		printf("we are in CHILD\n");
-		printf("----------------------------------\n");
-		printf("fk_id: %d\n", fk_id);
-		printf("PID child: %d\n", pid_child);
-		printf("==================================\n");
+		// printf("==================================\n");
+		// printf("fk_id: %d\n", fk_id);
+		// printf("PID child: %d\n", pid_child);
+		// printf("==================================\n");
+		// printf("\n");
 	}
 	else if (fk_id == FORK_ERROR)
 	{
@@ -28,17 +30,18 @@ int main(void)
 	}
 	else // if (fk_id != FORK_CHILD && fk_id != FORK_ERROR) 
 	{
-		
 		sleep(2);
 		pid_parent = getpid();
 		pid_child = fk_id;
 
+		// printf("==================================\n");
 		printf("we are in PARENT\n");
-		printf("----------------------------------\n");
-		printf("fk_id: %d\n", fk_id);
-		printf("PID parent: %d\n", pid_parent);
-		printf("PID child : %d\n", pid_child);
-		printf("==================================\n");
+		// printf("==================================\n");
+		// printf("fk_id: %d\n", fk_id);
+		// printf("PID parent: %d\n", pid_parent);
+		// printf("PID child : %d\n", pid_child);
+		// printf("==================================\n");
+		// printf("\n");
 	}
 
 	
