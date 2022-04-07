@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/wait.h>
 // ------------------------------------
 #define FORK_ERROR	-1
 #define FORK_CHILD	0
@@ -18,25 +19,53 @@ int main(void)
 	pid_t fk_id;
 
 	fk_id = fork();
+	int n;
 
-	if (is_fork_parent(fk_id))
+	if (fk_id == FORK_CHILD)
 	{
-		fk_id = fork();
-
-		if (is_fork_parent(fk_id))
-		{
-			fk_id = fork();
-		
-			if (is_fork_parent(fk_id))
-			{
-				fk_id = fork();
-			}
-		}
+		n = 10;
+	}
+	else if (is_fork_parent(fk_id))
+	{
+		n = 20;
 	}
 
-	printf("Salut\n");
+	if (is_fork_parent(fk_id))
+		wait(NULL);
+
+	for (int i = n; i < n + 6; i++)
+	{
+		printf("%d ", i);
+	}
+	
+
 	return 0;
 }
+// ------------------------------------
+// int main(void)
+// {
+// 	pid_t fk_id;
+
+// 	fk_id = fork();
+
+// 	if (is_fork_parent(fk_id))
+// 	{
+// 		fk_id = fork();
+
+// 		if (is_fork_parent(fk_id))
+// 		{
+// 			fk_id = fork();
+		
+// 			if (is_fork_parent(fk_id))
+// 			{
+// 				fk_id = fork();
+// 			}
+// 		}
+// 	}
+
+// 	printf("Salut\n");
+// 	return 0;
+// }
 
 // ------------------------------------
 // int main(void)
