@@ -22,22 +22,15 @@ int main(void)
 	int n;
 
 	if (fk_id == FORK_CHILD)
-	{
 		n = 10;
-	}
 	else if (is_fork_parent(fk_id))
-	{
 		n = 20;
-	}
 
 	if (is_fork_parent(fk_id))
 		wait(NULL);
 
 	for (int i = n; i < n + 6; i++)
-	{
-		printf("%d ", i);
-	}
-	
+		printf("%d ", i);	
 
 	return 0;
 }
