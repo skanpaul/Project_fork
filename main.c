@@ -22,18 +22,37 @@ int main(void)
 	int n;
 
 	if (fk_id == FORK_CHILD)
-		n = 10;
+	{
+		printf("CHILD process | own PID: %d | parent PID: %d\n", getpid(), getppid());
+	}
 	else if (is_fork_parent(fk_id))
-		n = 20;
-
-	if (is_fork_parent(fk_id))
+	{
 		wait(NULL);
-
-	for (int i = n; i < n + 6; i++)
-		printf("%d ", i);	
-
+		printf("PARENT process| own PID: %d | parent PID: %d\n", getpid(), getppid());
+	}
 	return 0;
 }
+// ------------------------------------
+// int main(void)
+// {
+// 	pid_t fk_id;
+
+// 	fk_id = fork();
+// 	int n;
+
+// 	if (fk_id == FORK_CHILD)
+// 		n = 10;
+// 	else if (is_fork_parent(fk_id))
+// 		n = 20;
+
+// 	if (is_fork_parent(fk_id))
+// 		wait(NULL);
+
+// 	for (int i = n; i < n + 6; i++)
+// 		printf("%d ", i);	
+
+// 	return 0;
+// }
 // ------------------------------------
 // int main(void)
 // {
