@@ -13,25 +13,25 @@ int is_fork_parent(pid_t fk_id)
 		return 0; 		// NO
 }
 
-// ------------------------------------
-int main(void)
-{
-	pid_t fk_id;
+// // ------------------------------------
+// int main(void)
+// {
+// 	pid_t fk_id;
 
-	fk_id = fork();
-	int n;
+// 	fk_id = fork();
+// 	int n;
 
-	if (fk_id == FORK_CHILD)
-	{
-		printf("CHILD process | own PID: %d | parent PID: %d\n", getpid(), getppid());
-	}
-	else if (is_fork_parent(fk_id))
-	{
-		wait(NULL);
-		printf("PARENT process| own PID: %d | parent PID: %d\n", getpid(), getppid());
-	}
-	return 0;
-}
+// 	if (fk_id == FORK_CHILD)
+// 	{
+// 		printf("CHILD process | own PID: %d | parent PID: %d\n", getpid(), getppid());
+// 	}
+// 	else if (is_fork_parent(fk_id))
+// 	{
+// 		wait(NULL);
+// 		printf("PARENT process| own PID: %d | parent PID: %d\n", getpid(), getppid());
+// 	}
+// 	return 0;
+// }
 // ------------------------------------
 // int main(void)
 // {
@@ -54,6 +54,31 @@ int main(void)
 // 	return 0;
 // }
 // ------------------------------------
+int main(void)
+{
+	pid_t fk_id;
+
+	fk_id = fork();
+
+	if (fk_id == FORK_CHILD)
+	{
+		fk_id = fork();
+
+		if (fk_id == FORK_CHILD)
+		{
+			fk_id = fork();
+		
+			if (fk_id == FORK_CHILD)
+			{
+				fk_id = fork();
+			}
+		}
+	}
+
+	printf("Salut\n");
+	return 0;
+}
+// // ------------------------------------
 // int main(void)
 // {
 // 	pid_t fk_id;
