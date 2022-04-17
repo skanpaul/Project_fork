@@ -1,16 +1,17 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <sys/wait.h>
 // ------------------------------------
-#define FORK_ERROR	-1
-#define FORK_CHILD	0
+#define FORK_ERROR -1
+#define FORK_CHILD 0
 // ------------------------------------
 int is_parent(pid_t fk_id)
 {
 	if (fk_id != FORK_CHILD && fk_id != FORK_ERROR)
-		return 1; 	// YES
+		return 1; // YES
 	else
-		return 0; 		// NO
+		return 0; // NO
 }
 
 // ------------------------------------
@@ -73,7 +74,7 @@ int main()
 // 		wait(NULL);
 
 // 	for (int i = n; i < n + 6; i++)
-// 		printf("%d ", i);	
+// 		printf("%d ", i);
 
 // 	return 0;
 // }
@@ -116,7 +117,7 @@ int main()
 // 		if (is_fork_parent(fk_id))
 // 		{
 // 			fk_id = fork();
-		
+
 // 			if (is_fork_parent(fk_id))
 // 			{
 // 				fk_id = fork();
@@ -153,7 +154,7 @@ int main()
 // 	{
 // 		printf("The forking FAILED\n");
 // 	}
-// 	else // if (fk_id != FORK_CHILD && fk_id != FORK_ERROR) 
+// 	else // if (fk_id != FORK_CHILD && fk_id != FORK_ERROR)
 // 	{
 // 		sleep(2);
 // 		pid_parent = getpid();
@@ -167,7 +168,7 @@ int main()
 // 		printf("PID child : %d\n", pid_child);
 // 		printf("==================================\n");
 // 		printf("\n");
-// 	}	
+// 	}
 // 	return 0;
 // }
 
@@ -184,4 +185,39 @@ int main()
 // 	return 0;
 // }
 // ------------------------------------
+
+int main(int argc, char *argv[])
+{
+	int pid = fork();
+	if (pid == -1)
+		return 1;
+	//—----------------------CHILD----------------------
+	if (pid == 0)
+	{
+		int err = execlp("ping",
+						 "ping", "-c", "3", "google.com", NULL);
+		if (err == -1)
+		{
+			printf("Error ocurred\n");
+			return 2;
+		}
+	}
+	//—----------------------PARENT----------------------
+	else
+	{
+		int wstatus;
+		wait(&wstatus);
+
+		if (WIFEXITED(wstatus))
+		{
+			int statusCode = WEXITSTATUS(wstatus);
+			if (statusCode == 0)
+				printf("Success\n");
+			else
+				printf("Failure with status code %d\n", statusCode);
+		}
+	}
+
+	return 0;
+}
 
